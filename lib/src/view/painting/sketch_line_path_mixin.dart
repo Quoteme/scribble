@@ -20,12 +20,20 @@ mixin SketchLinePathMixin {
   Path? getPathForLine(
     SketchLine line, {
     double scaleFactor = 1.0,
+    double offsetX = 0,
+    double offsetY = 0,
   }) {
     final needSimulate = simulatePressure &&
         line.points.length > 1 &&
         line.points.every((p) => p.pressure == line.points.first.pressure);
     final points = line.points
-        .map((point) => pf.PointVector(point.x, point.y, point.pressure))
+        .map(
+          (point) => pf.PointVector(
+            point.x + offsetX,
+            point.y + offsetY,
+            point.pressure,
+          ),
+        )
         .toList();
     final outlinePoints = pf.getStroke(
       points,

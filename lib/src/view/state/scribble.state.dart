@@ -70,6 +70,22 @@ sealed class ScribbleState with _$ScribbleState {
     /// will mean no simplification.
     /// {@endtemplate}
     @Default(0) double simplificationTolerance,
+
+    /// {@template view.state.scribble_state.offset_x}
+    /// The offset of the x-axis of the canvas.
+    ///
+    /// The entire canvas is shifted by this amount to the right.
+    /// New lines are drawn with this offset in mind.
+    /// {@endtemplate}
+    @Default(0) double offsetX,
+
+    /// {@template view.state.scribble_state.offset_y}
+    /// The offset of the y-axis of the canvas.
+    ///
+    /// The entire canvas is shifted by this amount to the bottom.
+    /// New lines are drawn with this offset in mind.
+    /// {@endtemplate}
+    @Default(0) double offsetY,
   }) = Drawing;
 
   /// The state of the scribble widget when the user is currently erasing.
@@ -102,6 +118,22 @@ sealed class ScribbleState with _$ScribbleState {
     /// Lines will be simplified when they are finished. A value of 0 (default)
     /// will mean no simplification.
     @Default(0) double simplificationTolerance,
+
+    /// {@template view.state.scribble_state.offset_x}
+    /// The offset of the x-axis of the canvas.
+    ///
+    /// The entire canvas is shifted by this amount to the right.
+    /// New lines are drawn with this offset in mind.
+    /// {@endtemplate}
+    @Default(0) double offsetX,
+
+    /// {@template view.state.scribble_state.offset_y}
+    /// The offset of the y-axis of the canvas.
+    ///
+    /// The entire canvas is shifted by this amount to the bottom.
+    /// New lines are drawn with this offset in mind.
+    /// {@endtemplate}
+    @Default(0) double offsetY,
   }) = Erasing;
 
   /// Constructs a [ScribbleState] from a JSON object.

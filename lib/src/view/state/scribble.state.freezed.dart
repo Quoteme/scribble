@@ -55,11 +55,29 @@ mixin _$ScribbleState {
   /// {@endtemplate}
   double get scaleFactor => throw _privateConstructorUsedError;
 
+  /// {@template view.state.scribble_state.simplification_tolerance}
   /// The current tolerance of simplification, in pixels.
   ///
   /// Lines will be simplified when they are finished. A value of 0 (default)
   /// will mean no simplification.
+  /// {@endtemplate}
   double get simplificationTolerance => throw _privateConstructorUsedError;
+
+  /// {@template view.state.scribble_state.offset_x}
+  /// The offset of the x-axis of the canvas.
+  ///
+  /// The entire canvas is shifted by this amount to the right.
+  /// New lines are drawn with this offset in mind.
+  /// {@endtemplate}
+  double get offsetX => throw _privateConstructorUsedError;
+
+  /// {@template view.state.scribble_state.offset_y}
+  /// The offset of the y-axis of the canvas.
+  ///
+  /// The entire canvas is shifted by this amount to the bottom.
+  /// New lines are drawn with this offset in mind.
+  /// {@endtemplate}
+  double get offsetY => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
@@ -71,7 +89,9 @@ mixin _$ScribbleState {
             int selectedColor,
             double selectedWidth,
             double scaleFactor,
-            double simplificationTolerance)
+            double simplificationTolerance,
+            double offsetX,
+            double offsetY)
         drawing,
     required TResult Function(
             Sketch sketch,
@@ -80,7 +100,9 @@ mixin _$ScribbleState {
             Point? pointerPosition,
             double selectedWidth,
             double scaleFactor,
-            double simplificationTolerance)
+            double simplificationTolerance,
+            double offsetX,
+            double offsetY)
         erasing,
   }) =>
       throw _privateConstructorUsedError;
@@ -95,7 +117,9 @@ mixin _$ScribbleState {
             int selectedColor,
             double selectedWidth,
             double scaleFactor,
-            double simplificationTolerance)?
+            double simplificationTolerance,
+            double offsetX,
+            double offsetY)?
         drawing,
     TResult? Function(
             Sketch sketch,
@@ -104,7 +128,9 @@ mixin _$ScribbleState {
             Point? pointerPosition,
             double selectedWidth,
             double scaleFactor,
-            double simplificationTolerance)?
+            double simplificationTolerance,
+            double offsetX,
+            double offsetY)?
         erasing,
   }) =>
       throw _privateConstructorUsedError;
@@ -119,7 +145,9 @@ mixin _$ScribbleState {
             int selectedColor,
             double selectedWidth,
             double scaleFactor,
-            double simplificationTolerance)?
+            double simplificationTolerance,
+            double offsetX,
+            double offsetY)?
         drawing,
     TResult Function(
             Sketch sketch,
@@ -128,7 +156,9 @@ mixin _$ScribbleState {
             Point? pointerPosition,
             double selectedWidth,
             double scaleFactor,
-            double simplificationTolerance)?
+            double simplificationTolerance,
+            double offsetX,
+            double offsetY)?
         erasing,
     required TResult orElse(),
   }) =>
@@ -152,8 +182,13 @@ mixin _$ScribbleState {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  /// Serializes this ScribbleState to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ScribbleState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ScribbleStateCopyWith<ScribbleState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -171,7 +206,9 @@ abstract class $ScribbleStateCopyWith<$Res> {
       Point? pointerPosition,
       double selectedWidth,
       double scaleFactor,
-      double simplificationTolerance});
+      double simplificationTolerance,
+      double offsetX,
+      double offsetY});
 
   $SketchCopyWith<$Res> get sketch;
   $PointCopyWith<$Res>? get pointerPosition;
@@ -187,6 +224,8 @@ class _$ScribbleStateCopyWithImpl<$Res, $Val extends ScribbleState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ScribbleState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -197,6 +236,8 @@ class _$ScribbleStateCopyWithImpl<$Res, $Val extends ScribbleState>
     Object? selectedWidth = null,
     Object? scaleFactor = null,
     Object? simplificationTolerance = null,
+    Object? offsetX = null,
+    Object? offsetY = null,
   }) {
     return _then(_value.copyWith(
       sketch: null == sketch
@@ -227,9 +268,19 @@ class _$ScribbleStateCopyWithImpl<$Res, $Val extends ScribbleState>
           ? _value.simplificationTolerance
           : simplificationTolerance // ignore: cast_nullable_to_non_nullable
               as double,
+      offsetX: null == offsetX
+          ? _value.offsetX
+          : offsetX // ignore: cast_nullable_to_non_nullable
+              as double,
+      offsetY: null == offsetY
+          ? _value.offsetY
+          : offsetY // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 
+  /// Create a copy of ScribbleState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $SketchCopyWith<$Res> get sketch {
@@ -238,6 +289,8 @@ class _$ScribbleStateCopyWithImpl<$Res, $Val extends ScribbleState>
     });
   }
 
+  /// Create a copy of ScribbleState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PointCopyWith<$Res>? get pointerPosition {
@@ -268,7 +321,9 @@ abstract class _$$DrawingImplCopyWith<$Res>
       int selectedColor,
       double selectedWidth,
       double scaleFactor,
-      double simplificationTolerance});
+      double simplificationTolerance,
+      double offsetX,
+      double offsetY});
 
   @override
   $SketchCopyWith<$Res> get sketch;
@@ -285,6 +340,8 @@ class __$$DrawingImplCopyWithImpl<$Res>
       _$DrawingImpl _value, $Res Function(_$DrawingImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ScribbleState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -297,6 +354,8 @@ class __$$DrawingImplCopyWithImpl<$Res>
     Object? selectedWidth = null,
     Object? scaleFactor = null,
     Object? simplificationTolerance = null,
+    Object? offsetX = null,
+    Object? offsetY = null,
   }) {
     return _then(_$DrawingImpl(
       sketch: null == sketch
@@ -335,9 +394,19 @@ class __$$DrawingImplCopyWithImpl<$Res>
           ? _value.simplificationTolerance
           : simplificationTolerance // ignore: cast_nullable_to_non_nullable
               as double,
+      offsetX: null == offsetX
+          ? _value.offsetX
+          : offsetX // ignore: cast_nullable_to_non_nullable
+              as double,
+      offsetY: null == offsetY
+          ? _value.offsetY
+          : offsetY // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 
+  /// Create a copy of ScribbleState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $SketchLineCopyWith<$Res>? get activeLine {
@@ -364,6 +433,8 @@ class _$DrawingImpl extends Drawing {
       this.selectedWidth = 5,
       this.scaleFactor = 1,
       this.simplificationTolerance = 0,
+      this.offsetX = 0,
+      this.offsetY = 0,
       final String? $type})
       : _activePointerIds = activePointerIds,
         $type = $type ?? 'drawing',
@@ -425,20 +496,42 @@ class _$DrawingImpl extends Drawing {
   @JsonKey()
   final double scaleFactor;
 
+  /// {@template view.state.scribble_state.simplification_tolerance}
   /// The current tolerance of simplification, in pixels.
   ///
   /// Lines will be simplified when they are finished. A value of 0 (default)
   /// will mean no simplification.
+  /// {@endtemplate}
   @override
   @JsonKey()
   final double simplificationTolerance;
+
+  /// {@template view.state.scribble_state.offset_x}
+  /// The offset of the x-axis of the canvas.
+  ///
+  /// The entire canvas is shifted by this amount to the right.
+  /// New lines are drawn with this offset in mind.
+  /// {@endtemplate}
+  @override
+  @JsonKey()
+  final double offsetX;
+
+  /// {@template view.state.scribble_state.offset_y}
+  /// The offset of the y-axis of the canvas.
+  ///
+  /// The entire canvas is shifted by this amount to the bottom.
+  /// New lines are drawn with this offset in mind.
+  /// {@endtemplate}
+  @override
+  @JsonKey()
+  final double offsetY;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'ScribbleState.drawing(sketch: $sketch, activeLine: $activeLine, allowedPointersMode: $allowedPointersMode, activePointerIds: $activePointerIds, pointerPosition: $pointerPosition, selectedColor: $selectedColor, selectedWidth: $selectedWidth, scaleFactor: $scaleFactor, simplificationTolerance: $simplificationTolerance)';
+    return 'ScribbleState.drawing(sketch: $sketch, activeLine: $activeLine, allowedPointersMode: $allowedPointersMode, activePointerIds: $activePointerIds, pointerPosition: $pointerPosition, selectedColor: $selectedColor, selectedWidth: $selectedWidth, scaleFactor: $scaleFactor, simplificationTolerance: $simplificationTolerance, offsetX: $offsetX, offsetY: $offsetY)';
   }
 
   @override
@@ -463,10 +556,12 @@ class _$DrawingImpl extends Drawing {
                 other.scaleFactor == scaleFactor) &&
             (identical(
                     other.simplificationTolerance, simplificationTolerance) ||
-                other.simplificationTolerance == simplificationTolerance));
+                other.simplificationTolerance == simplificationTolerance) &&
+            (identical(other.offsetX, offsetX) || other.offsetX == offsetX) &&
+            (identical(other.offsetY, offsetY) || other.offsetY == offsetY));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -478,9 +573,13 @@ class _$DrawingImpl extends Drawing {
       selectedColor,
       selectedWidth,
       scaleFactor,
-      simplificationTolerance);
+      simplificationTolerance,
+      offsetX,
+      offsetY);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ScribbleState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DrawingImplCopyWith<_$DrawingImpl> get copyWith =>
@@ -498,7 +597,9 @@ class _$DrawingImpl extends Drawing {
             int selectedColor,
             double selectedWidth,
             double scaleFactor,
-            double simplificationTolerance)
+            double simplificationTolerance,
+            double offsetX,
+            double offsetY)
         drawing,
     required TResult Function(
             Sketch sketch,
@@ -507,7 +608,9 @@ class _$DrawingImpl extends Drawing {
             Point? pointerPosition,
             double selectedWidth,
             double scaleFactor,
-            double simplificationTolerance)
+            double simplificationTolerance,
+            double offsetX,
+            double offsetY)
         erasing,
   }) {
     return drawing(
@@ -519,7 +622,9 @@ class _$DrawingImpl extends Drawing {
         selectedColor,
         selectedWidth,
         scaleFactor,
-        simplificationTolerance);
+        simplificationTolerance,
+        offsetX,
+        offsetY);
   }
 
   @override
@@ -534,7 +639,9 @@ class _$DrawingImpl extends Drawing {
             int selectedColor,
             double selectedWidth,
             double scaleFactor,
-            double simplificationTolerance)?
+            double simplificationTolerance,
+            double offsetX,
+            double offsetY)?
         drawing,
     TResult? Function(
             Sketch sketch,
@@ -543,7 +650,9 @@ class _$DrawingImpl extends Drawing {
             Point? pointerPosition,
             double selectedWidth,
             double scaleFactor,
-            double simplificationTolerance)?
+            double simplificationTolerance,
+            double offsetX,
+            double offsetY)?
         erasing,
   }) {
     return drawing?.call(
@@ -555,7 +664,9 @@ class _$DrawingImpl extends Drawing {
         selectedColor,
         selectedWidth,
         scaleFactor,
-        simplificationTolerance);
+        simplificationTolerance,
+        offsetX,
+        offsetY);
   }
 
   @override
@@ -570,7 +681,9 @@ class _$DrawingImpl extends Drawing {
             int selectedColor,
             double selectedWidth,
             double scaleFactor,
-            double simplificationTolerance)?
+            double simplificationTolerance,
+            double offsetX,
+            double offsetY)?
         drawing,
     TResult Function(
             Sketch sketch,
@@ -579,7 +692,9 @@ class _$DrawingImpl extends Drawing {
             Point? pointerPosition,
             double selectedWidth,
             double scaleFactor,
-            double simplificationTolerance)?
+            double simplificationTolerance,
+            double offsetX,
+            double offsetY)?
         erasing,
     required TResult orElse(),
   }) {
@@ -593,7 +708,9 @@ class _$DrawingImpl extends Drawing {
           selectedColor,
           selectedWidth,
           scaleFactor,
-          simplificationTolerance);
+          simplificationTolerance,
+          offsetX,
+          offsetY);
     }
     return orElse();
   }
@@ -647,40 +764,40 @@ abstract class Drawing extends ScribbleState {
       final int selectedColor,
       final double selectedWidth,
       final double scaleFactor,
-      final double simplificationTolerance}) = _$DrawingImpl;
+      final double simplificationTolerance,
+      final double offsetX,
+      final double offsetY}) = _$DrawingImpl;
   const Drawing._() : super._();
 
   factory Drawing.fromJson(Map<String, dynamic> json) = _$DrawingImpl.fromJson;
 
-  @override
-
   /// The current state of the sketch
+  @override
   Sketch get sketch;
 
   /// The line that is currently being drawn
   SketchLine? get activeLine;
-  @override
 
   /// Which pointers are allowed for drawing and will be captured by the
   /// scribble widget.
-  ScribblePointerMode get allowedPointersMode;
   @override
+  ScribblePointerMode get allowedPointersMode;
 
   /// The ids of all supported pointers that are currently interacting with
   /// the widget.
-  List<int> get activePointerIds;
   @override
+  List<int> get activePointerIds;
 
   /// The current position of the pointer
+  @override
   Point? get pointerPosition;
 
   /// The color that is currently being drawn with
   int get selectedColor;
-  @override
 
   /// The current width of the pen
-  double get selectedWidth;
   @override
+  double get selectedWidth;
 
   /// {@template view.state.scribble_state.scale_factor}
   /// How much the widget is scaled at the moment.
@@ -688,16 +805,40 @@ abstract class Drawing extends ScribbleState {
   /// Can be used if zoom functionality is needed
   /// (e.g. through InteractiveViewer) so that the pen width remains the same.
   /// {@endtemplate}
-  double get scaleFactor;
   @override
+  double get scaleFactor;
 
+  /// {@template view.state.scribble_state.simplification_tolerance}
   /// The current tolerance of simplification, in pixels.
   ///
   /// Lines will be simplified when they are finished. A value of 0 (default)
   /// will mean no simplification.
-  double get simplificationTolerance;
+  /// {@endtemplate}
   @override
-  @JsonKey(ignore: true)
+  double get simplificationTolerance;
+
+  /// {@template view.state.scribble_state.offset_x}
+  /// The offset of the x-axis of the canvas.
+  ///
+  /// The entire canvas is shifted by this amount to the right.
+  /// New lines are drawn with this offset in mind.
+  /// {@endtemplate}
+  @override
+  double get offsetX;
+
+  /// {@template view.state.scribble_state.offset_y}
+  /// The offset of the y-axis of the canvas.
+  ///
+  /// The entire canvas is shifted by this amount to the bottom.
+  /// New lines are drawn with this offset in mind.
+  /// {@endtemplate}
+  @override
+  double get offsetY;
+
+  /// Create a copy of ScribbleState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DrawingImplCopyWith<_$DrawingImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -717,7 +858,9 @@ abstract class _$$ErasingImplCopyWith<$Res>
       Point? pointerPosition,
       double selectedWidth,
       double scaleFactor,
-      double simplificationTolerance});
+      double simplificationTolerance,
+      double offsetX,
+      double offsetY});
 
   @override
   $SketchCopyWith<$Res> get sketch;
@@ -733,6 +876,8 @@ class __$$ErasingImplCopyWithImpl<$Res>
       _$ErasingImpl _value, $Res Function(_$ErasingImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ScribbleState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -743,6 +888,8 @@ class __$$ErasingImplCopyWithImpl<$Res>
     Object? selectedWidth = null,
     Object? scaleFactor = null,
     Object? simplificationTolerance = null,
+    Object? offsetX = null,
+    Object? offsetY = null,
   }) {
     return _then(_$ErasingImpl(
       sketch: null == sketch
@@ -773,6 +920,14 @@ class __$$ErasingImplCopyWithImpl<$Res>
           ? _value.simplificationTolerance
           : simplificationTolerance // ignore: cast_nullable_to_non_nullable
               as double,
+      offsetX: null == offsetX
+          ? _value.offsetX
+          : offsetX // ignore: cast_nullable_to_non_nullable
+              as double,
+      offsetY: null == offsetY
+          ? _value.offsetY
+          : offsetY // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -788,6 +943,8 @@ class _$ErasingImpl extends Erasing {
       this.selectedWidth = 5,
       this.scaleFactor = 1,
       this.simplificationTolerance = 0,
+      this.offsetX = 0,
+      this.offsetY = 0,
       final String? $type})
       : _activePointerIds = activePointerIds,
         $type = $type ?? 'erasing',
@@ -846,12 +1003,32 @@ class _$ErasingImpl extends Erasing {
   @JsonKey()
   final double simplificationTolerance;
 
+  /// {@template view.state.scribble_state.offset_x}
+  /// The offset of the x-axis of the canvas.
+  ///
+  /// The entire canvas is shifted by this amount to the right.
+  /// New lines are drawn with this offset in mind.
+  /// {@endtemplate}
+  @override
+  @JsonKey()
+  final double offsetX;
+
+  /// {@template view.state.scribble_state.offset_y}
+  /// The offset of the y-axis of the canvas.
+  ///
+  /// The entire canvas is shifted by this amount to the bottom.
+  /// New lines are drawn with this offset in mind.
+  /// {@endtemplate}
+  @override
+  @JsonKey()
+  final double offsetY;
+
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'ScribbleState.erasing(sketch: $sketch, allowedPointersMode: $allowedPointersMode, activePointerIds: $activePointerIds, pointerPosition: $pointerPosition, selectedWidth: $selectedWidth, scaleFactor: $scaleFactor, simplificationTolerance: $simplificationTolerance)';
+    return 'ScribbleState.erasing(sketch: $sketch, allowedPointersMode: $allowedPointersMode, activePointerIds: $activePointerIds, pointerPosition: $pointerPosition, selectedWidth: $selectedWidth, scaleFactor: $scaleFactor, simplificationTolerance: $simplificationTolerance, offsetX: $offsetX, offsetY: $offsetY)';
   }
 
   @override
@@ -872,10 +1049,12 @@ class _$ErasingImpl extends Erasing {
                 other.scaleFactor == scaleFactor) &&
             (identical(
                     other.simplificationTolerance, simplificationTolerance) ||
-                other.simplificationTolerance == simplificationTolerance));
+                other.simplificationTolerance == simplificationTolerance) &&
+            (identical(other.offsetX, offsetX) || other.offsetX == offsetX) &&
+            (identical(other.offsetY, offsetY) || other.offsetY == offsetY));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -885,9 +1064,13 @@ class _$ErasingImpl extends Erasing {
       pointerPosition,
       selectedWidth,
       scaleFactor,
-      simplificationTolerance);
+      simplificationTolerance,
+      offsetX,
+      offsetY);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ScribbleState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ErasingImplCopyWith<_$ErasingImpl> get copyWith =>
@@ -905,7 +1088,9 @@ class _$ErasingImpl extends Erasing {
             int selectedColor,
             double selectedWidth,
             double scaleFactor,
-            double simplificationTolerance)
+            double simplificationTolerance,
+            double offsetX,
+            double offsetY)
         drawing,
     required TResult Function(
             Sketch sketch,
@@ -914,11 +1099,21 @@ class _$ErasingImpl extends Erasing {
             Point? pointerPosition,
             double selectedWidth,
             double scaleFactor,
-            double simplificationTolerance)
+            double simplificationTolerance,
+            double offsetX,
+            double offsetY)
         erasing,
   }) {
-    return erasing(sketch, allowedPointersMode, activePointerIds,
-        pointerPosition, selectedWidth, scaleFactor, simplificationTolerance);
+    return erasing(
+        sketch,
+        allowedPointersMode,
+        activePointerIds,
+        pointerPosition,
+        selectedWidth,
+        scaleFactor,
+        simplificationTolerance,
+        offsetX,
+        offsetY);
   }
 
   @override
@@ -933,7 +1128,9 @@ class _$ErasingImpl extends Erasing {
             int selectedColor,
             double selectedWidth,
             double scaleFactor,
-            double simplificationTolerance)?
+            double simplificationTolerance,
+            double offsetX,
+            double offsetY)?
         drawing,
     TResult? Function(
             Sketch sketch,
@@ -942,11 +1139,21 @@ class _$ErasingImpl extends Erasing {
             Point? pointerPosition,
             double selectedWidth,
             double scaleFactor,
-            double simplificationTolerance)?
+            double simplificationTolerance,
+            double offsetX,
+            double offsetY)?
         erasing,
   }) {
-    return erasing?.call(sketch, allowedPointersMode, activePointerIds,
-        pointerPosition, selectedWidth, scaleFactor, simplificationTolerance);
+    return erasing?.call(
+        sketch,
+        allowedPointersMode,
+        activePointerIds,
+        pointerPosition,
+        selectedWidth,
+        scaleFactor,
+        simplificationTolerance,
+        offsetX,
+        offsetY);
   }
 
   @override
@@ -961,7 +1168,9 @@ class _$ErasingImpl extends Erasing {
             int selectedColor,
             double selectedWidth,
             double scaleFactor,
-            double simplificationTolerance)?
+            double simplificationTolerance,
+            double offsetX,
+            double offsetY)?
         drawing,
     TResult Function(
             Sketch sketch,
@@ -970,13 +1179,23 @@ class _$ErasingImpl extends Erasing {
             Point? pointerPosition,
             double selectedWidth,
             double scaleFactor,
-            double simplificationTolerance)?
+            double simplificationTolerance,
+            double offsetX,
+            double offsetY)?
         erasing,
     required TResult orElse(),
   }) {
     if (erasing != null) {
-      return erasing(sketch, allowedPointersMode, activePointerIds,
-          pointerPosition, selectedWidth, scaleFactor, simplificationTolerance);
+      return erasing(
+          sketch,
+          allowedPointersMode,
+          activePointerIds,
+          pointerPosition,
+          selectedWidth,
+          scaleFactor,
+          simplificationTolerance,
+          offsetX,
+          offsetY);
     }
     return orElse();
   }
@@ -1028,49 +1247,71 @@ abstract class Erasing extends ScribbleState {
       final Point? pointerPosition,
       final double selectedWidth,
       final double scaleFactor,
-      final double simplificationTolerance}) = _$ErasingImpl;
+      final double simplificationTolerance,
+      final double offsetX,
+      final double offsetY}) = _$ErasingImpl;
   const Erasing._() : super._();
 
   factory Erasing.fromJson(Map<String, dynamic> json) = _$ErasingImpl.fromJson;
 
-  @override
-
   /// The current state of the sketch
-  Sketch get sketch;
   @override
+  Sketch get sketch;
 
   /// Which pointers are allowed for drawing and will be captured by the
   /// scribble widget.
-  ScribblePointerMode get allowedPointersMode;
   @override
+  ScribblePointerMode get allowedPointersMode;
 
   /// The ids of all supported pointers that are currently interacting with
   /// the widget.
-  List<int> get activePointerIds;
   @override
+  List<int> get activePointerIds;
 
   /// The current position of the pointer
-  Point? get pointerPosition;
   @override
+  Point? get pointerPosition;
 
   /// The current width of the pen
-  double get selectedWidth;
   @override
+  double get selectedWidth;
 
   /// How much the widget is scaled at the moment.
   ///
   /// Can be used if zoom functionality is needed
   /// (e.g. through InteractiveViewer) so that the pen width remains the same.
-  double get scaleFactor;
   @override
+  double get scaleFactor;
 
   /// The current tolerance of simplification, in pixels.
   ///
   /// Lines will be simplified when they are finished. A value of 0 (default)
   /// will mean no simplification.
-  double get simplificationTolerance;
   @override
-  @JsonKey(ignore: true)
+  double get simplificationTolerance;
+
+  /// {@template view.state.scribble_state.offset_x}
+  /// The offset of the x-axis of the canvas.
+  ///
+  /// The entire canvas is shifted by this amount to the right.
+  /// New lines are drawn with this offset in mind.
+  /// {@endtemplate}
+  @override
+  double get offsetX;
+
+  /// {@template view.state.scribble_state.offset_y}
+  /// The offset of the y-axis of the canvas.
+  ///
+  /// The entire canvas is shifted by this amount to the bottom.
+  /// New lines are drawn with this offset in mind.
+  /// {@endtemplate}
+  @override
+  double get offsetY;
+
+  /// Create a copy of ScribbleState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErasingImplCopyWith<_$ErasingImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

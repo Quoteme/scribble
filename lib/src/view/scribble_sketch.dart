@@ -13,6 +13,8 @@ class ScribbleSketch extends StatelessWidget {
   const ScribbleSketch({
     required this.sketch,
     this.scaleFactor = 1,
+    this.offsetX = 0,
+    this.offsetY = 0,
     this.simulatePressure = true,
     super.key,
   });
@@ -26,6 +28,16 @@ class ScribbleSketch extends StatelessWidget {
   /// (e.g. through InteractiveViewer) so that the pen width remains the same.
   final double scaleFactor;
 
+  /// The offset of the x-axis of the canvas.
+  /// The entire canvas is shifted by this amount to the right.
+  /// New lines are drawn with this offset in mind.
+  final double offsetX;
+
+  /// The offset of the y-axis of the canvas.
+  /// The entire canvas is shifted by this amount to the bottom.
+  /// New lines are drawn with this offset in mind.
+  final double offsetY;
+
   /// {@macro scribble.simulate_pressure}
   final bool simulatePressure;
 
@@ -35,6 +47,8 @@ class ScribbleSketch extends StatelessWidget {
       painter: ScribblePainter(
         sketch: sketch,
         scaleFactor: scaleFactor,
+        offsetX: offsetX,
+        offsetY: offsetY,
         simulatePressure: simulatePressure,
       ),
     );

@@ -8,6 +8,8 @@ class ScribblePainter extends CustomPainter with SketchLinePathMixin {
   ScribblePainter({
     required this.sketch,
     required this.scaleFactor,
+    required this.offsetX,
+    required this.offsetY,
     required this.simulatePressure,
   });
 
@@ -16,6 +18,12 @@ class ScribblePainter extends CustomPainter with SketchLinePathMixin {
 
   /// {@macro view.state.scribble_state.scale_factor}
   final double scaleFactor;
+
+  /// {@macro view.state.scribble_state.offset_x}
+  final double offsetX;
+
+  /// {@macro view.state.scribble_state.offset_y}
+  final double offsetY;
 
   @override
   final bool simulatePressure;
@@ -28,6 +36,8 @@ class ScribblePainter extends CustomPainter with SketchLinePathMixin {
       final path = getPathForLine(
         sketch.lines[i],
         scaleFactor: scaleFactor,
+        offsetX: offsetX,
+        offsetY: offsetY,
       );
       if (path == null) {
         continue;
@@ -41,6 +51,8 @@ class ScribblePainter extends CustomPainter with SketchLinePathMixin {
   bool shouldRepaint(ScribblePainter oldDelegate) {
     return oldDelegate.sketch != sketch ||
         oldDelegate.simulatePressure != simulatePressure ||
-        oldDelegate.scaleFactor != scaleFactor;
+        oldDelegate.scaleFactor != scaleFactor ||
+        oldDelegate.offsetX != offsetX ||
+        oldDelegate.offsetY != offsetY;
   }
 }

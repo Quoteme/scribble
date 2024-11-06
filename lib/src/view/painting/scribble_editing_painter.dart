@@ -45,6 +45,8 @@ class ScribbleEditingPainter extends CustomPainter with SketchLinePathMixin {
       final path = getPathForLine(
         activeLine,
         scaleFactor: state.scaleFactor,
+        offsetX: state.offsetX,
+        offsetY: state.offsetY,
       );
       if (path != null) {
         paint.color = Color(activeLine.color);
@@ -65,7 +67,10 @@ class ScribbleEditingPainter extends CustomPainter with SketchLinePathMixin {
         )
         ..strokeWidth = 1;
       canvas.drawCircle(
-        state.pointerPosition!.asOffset,
+        Offset(
+          state.pointerPosition!.x + state.offsetX,
+          state.pointerPosition!.y + state.offsetY,
+        ),
         state.selectedWidth / state.scaleFactor,
         paint,
       );

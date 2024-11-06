@@ -67,6 +67,8 @@ class Scribble extends StatelessWidget {
                 painter: ScribblePainter(
                   sketch: state.sketch,
                   scaleFactor: state.scaleFactor,
+                  offsetX: state.offsetX,
+                  offsetY: state.offsetY,
                   simulatePressure: simulatePressure,
                 ),
               ),

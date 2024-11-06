@@ -225,6 +225,20 @@ class ScribbleNotifier extends ScribbleNotifierBase
     );
   }
 
+  /// Sets the x-axis offset of the canvas.
+  void setOffsetX(double offsetX) {
+    temporaryValue = value.copyWith(
+      offsetX: offsetX,
+    );
+  }
+
+  /// Sets the y-axis offset of the canvas.
+  void setOffsetY(double offsetY) {
+    temporaryValue = value.copyWith(
+      offsetY: offsetY,
+    );
+  }
+
   /// Sets the color of the pen to the given color.
   void setColor(Color color) {
     temporaryValue = value.map(
@@ -432,8 +446,8 @@ class ScribbleNotifier extends ScribbleNotifierBase
         : (event.pressure - event.pressureMin) /
             (event.pressureMax - event.pressureMin);
     return Point(
-      event.localPosition.dx,
-      event.localPosition.dy,
+      event.localPosition.dx - value.offsetX,
+      event.localPosition.dy - value.offsetY,
       pressure: pressureCurve.transform(p),
     );
   }
